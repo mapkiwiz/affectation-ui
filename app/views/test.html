@@ -1,0 +1,27 @@
+<div class="row">
+	<div class="col-md-4">
+		<uib-tabset justified="true">
+		    <uib-tab heading="Enquêteurs">
+		    	<ul class="list">
+		    		<li ng-repeat="enq in enqueteurs" ng-click="selectItem($event)">
+		    			<span class="glyphicon glyphicon-user"></span>
+		    			{{ enq.name }}
+		    			<div class="pull-right" style="margin-top: -8px">
+		    				<span class="action glyphicon glyphicon-remove"></span>
+		    				<span class="action glyphicon glyphicon-menu-hamburger"></span>
+		    			</div>
+		    		</li>
+		    	</ul>
+		    </uib-tab>
+		    <uib-tab heading="Unités statistiques">
+		    	<ul class="list">
+				  <li ng-repeat="thing in things">
+				  	<span class="glyphicon glyphicon-map-marker"></span>
+				  	{{ thing }}
+				  </li>
+				</ul>
+			</uib-tab>
+		</uib-tabset>
+	</div>
+	<div id="map" class="col-md-8" style="border: 1px solid lightgray; border-radius: 5px; height: 450px; margin-left: -5px"></div>
+</div>
