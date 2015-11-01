@@ -8,68 +8,87 @@
  * Controller of the ihmApp
  */
 angular.module('ihmApp')
-  .factory('MapService', ['$window',
-  	function MapService($window) {
+  .factory('MapContext', ['$window',
+  	function ($window) {
   		var map = $window.L.map("map");
   		var overlays = {};
+  		var mapView = {
+	            lat: 45.5,
+	            lng: 6,
+	            zoom: 9
+	        };
+        var basemaps = {
+	            toner: {
+	                layer: $window.L.tileLayer("//stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png"),
+	                label: "Stamen Toner" },
+	            lite: {
+	                layer: $window.L.tileLayer("//stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png"),
+	                label: "Stamen Toner Lite"},
+	            osm: {
+	                layer: $window.L.tileLayer("//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"),
+	                label: "Open Street Map" }
+	        };
   		return {
   			getMap: function() {
 		        	return map;
 		        },
 		    setOverlay: function(name, overlay) {
-		    	overlays[name] = overlay;
-		    },
+			    	overlays[name] = overlay;
+			    },
 		    getOverlay: function(name) {
-		    	return overlays[name];
-		    },
+			    	return overlays[name];
+			    },
 		    getBounds: function() {
-		    	var bounds = null;
-		    	for (var name in overlays) {
-		    		if (bounds) {
-		    			bounds.extend(overlays[name].getBounds());
-		    		} else {
-		    			bounds = overlays[name].getBounds();
-		    		}
-		    	}
-		    	return bounds;
-		    }
+			    	var bounds = null;
+			    	for (var name in overlays) {
+			    		if (bounds) {
+			    			bounds.extend(overlays[name].getBounds());
+			    		} else {
+			    			bounds = overlays[name].getBounds();
+			    		}
+			    	}
+			    	return bounds;
+			    },
+		    getView: function() {
+			    	return mapView;
+			    },
+		    getBaseMaps: function() {
+			    	return basemaps;
+			    },
+			 fitAll: function() {
+			 	var bounds = this.getBounds();
+			 	if (bounds) {
+			 		map.fitBounds(bounds);
+			 	}
+			 }
   		};
   	}
   ])
-  .controller('MapCtrl', ['$scope', '$window', 'MapService',
-      function ($scope, $window, MapService) {
-      	var map = MapService.getMap();
+  .controller('MapCtrl', ['$scope', '$window', 'MapContext',
+      function ($scope, $window, mapcontext) {
+      	var map = mapcontext.getMap();
         $scope.title = "TestTitle";
-        $scope.overlays = {};
         $scope.setBaseMap = function(basemap) {
             map.removeLayer($scope.basemap.layer);
             basemap.layer.addTo(map);
             $scope.basemap = basemap;
         };
         $scope.fitAll = function() {
-        	map.fitBounds(MapService.getBounds());
+        	mapcontext.fitAll();
         };
         $scope.init = function() {
-            $scope.basemaps = {
-                toner: {
-                    layer: $window.L.tileLayer("//stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png"),
-                    label: "Stamen Toner" },
-                lite: {
-                    layer: $window.L.tileLayer("//stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png"),
-                    label: "Stamen Toner Lite"},
-                osm: {
-                    layer: $window.L.tileLayer("//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"),
-                    label: "Open Street Map" }
-            };
+        	$scope.mapcontext = mapcontext;
+            $scope.basemaps = mapcontext.getBaseMaps();
             $scope.basemap = $scope.basemaps.lite;
             $scope.basemaps.lite.layer.addTo(map);
-            var mapView = {
-                lat: 45.5,
-                lng: 6,
-                zoom: 9
-            };
+            var mapView = mapcontext.getView();
             map.setView($window.L.latLng(mapView.lat, mapView.lng), mapView.zoom, true);
-            $scope.map = map;
         };
+        $scope.$on('enqueteur.selected', function(event, gid, pan) {
+        	$scope.$broadcast('enqueteur.selected.bc', gid, pan);
+        });
+        $scope.$on('map.data.loaded', function() {
+        	mapcontext.fitAll();
+        });
         $scope.init();
   }]);

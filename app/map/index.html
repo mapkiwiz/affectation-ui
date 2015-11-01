@@ -47,9 +47,9 @@
             <li><a ng-href="/map">Contact</a></li>
           </ul>
           <ul  class="nav navbar-nav navbar-right">
-            <li><a ng-click="map.zoomIn()">Zoom In</a></li>
-            <li><a ng-click="map.zoomOut()">Zoom Out</a></li>
-            <li><a ng-click="fitAll()">Fit All</a></li>
+            <li><a ng-click="mapcontext.getMap().zoomIn()">Zoom In</a></li>
+            <li><a ng-click="mapcontext.getMap().zoomOut()">Zoom Out</a></li>
+            <li><a ng-click="mapcontext.fitAll()">Fit All</a></li>
             <li uib-dropdown>
                 <a id="layer-contrl" uib-dropdown-toggle ng-disabled="disabled">
                   Couches <span class="caret"></span>
@@ -90,7 +90,7 @@
               </uib-tab>
               <uib-tab heading="Unités statistiques">
                 <ul ng-controller="UnitesCtrl" class="list">
-                  <li ng-repeat="unite in unites">
+                  <li ng-repeat="unite in unites.features">
                     <span class="glyphicon glyphicon-record"></span>
                     {{ unite.properties.gid }}
                   </li>

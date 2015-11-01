@@ -8,6 +8,7 @@ var lazypipe = require('lazypipe');
 var rimraf = require('rimraf');
 var wiredep = require('wiredep').stream;
 var runSequence = require('run-sequence');
+var maven = require('gulp-maven-deploy');
 
 var yeoman = {
   app: require('./bower.json').appPath || 'app',
@@ -168,9 +169,9 @@ gulp.task('client:build', ['html', 'styles'], function () {
     .pipe(cssFilter)
     .pipe($.minifyCss({cache: true}))
     .pipe(cssFilter.restore())
-    .pipe($.rev())
+    // .pipe($.rev())
     .pipe(assets.restore())
-    .pipe($.revReplace())
+    // .pipe($.revReplace())
     .pipe($.useref())
     .pipe(gulp.dest(yeoman.dist));
 });
@@ -200,8 +201,38 @@ gulp.task('copy:fonts', function () {
     .pipe(gulp.dest(yeoman.dist + '/fonts'));
 });
 
-gulp.task('build', ['clean:dist'], function () {
-  runSequence(['images', 'copy:extras', 'copy:fonts', 'client:build']);
+gulp.task('copy:data', function() {
+  return gulp.src(yeoman.app + '/data/**/*')
+    .pipe(gulp.dest(yeoman.dist + '/data'));
+})
+
+gulp.task('build', ['clean:dist'], function (cb) {
+  runSequence(['images', 'copy:data', 'copy:extras', 'copy:fonts', 'client:build'], cb);
 });
+
+gulp.task('maven:copy', ['build'], function() {
+  var artifactId = 'affectation-ui';
+  var version = '0.0.1-SNAPSHOT';
+  return gulp.src(yeoman.dist + '/**/*')
+    .pipe(gulp.dest('target/META-INF/resources/webjars/' + artifactId + '/' + version));
+});
+
+gulp.task('maven:install', ['maven:copy'], function() {
+  return gulp.src('.')
+    .pipe(maven.install({
+        'config': {
+          'groupId': 'fr.gouv.agriculture.stats.affectation',
+          'type': 'jar',
+          'buildDir': 'target'
+        }
+      })
+    );
+});
+
+gulp.task('maven:clean', function (cb) {
+  rimraf('./target', cb);
+});
+
+gulp.task('clean', ['clean:dist', 'clean:tmp', 'maven:clean']);
 
 gulp.task('default', ['build']);

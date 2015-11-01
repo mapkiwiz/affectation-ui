@@ -13,17 +13,28 @@ angular.module('ihmApp')
                     partials = value.data;
                 });
             };
+            // var findEntity = function (gid) {
+            //     if (partials) {
+            //         for (var f in partials.features) {
+            //             if (f.properties.gid == gid) {
+            //                 return f;
+            //             }
+            //         }
+            //     }
+            //     return undefined;
+            // };
             return {
                 getEntities: getEntities,
                 entities: function () {
                     return partials;
                 }
+                // findEntity: findEntity
             };
         }
     ])
-  .controller('EnqueteursCtrl', ['$scope', '$window', '$location', '$anchorScroll', 'MapService', 'EnqueteursService',
-    function($scope, $window, $location, $anchorScroll, MapService, service) {
-        var map = MapService.getMap();
+  .controller('EnqueteursCtrl', ['$scope', '$window', '$location', '$anchorScroll', 'MapContext', 'EnqueteursService',
+    function($scope, $window, $location, $anchorScroll, mapcontext, service) {
+        var map = mapcontext.getMap();
         $scope.selected = undefined;
         $scope.$watch(service.entities, function(newValue, oldValue) {
             if (newValue) {
@@ -31,11 +42,12 @@ angular.module('ihmApp')
                 $scope.layer = $window.L.geoJson(newValue, {
                     onEachFeature: function(feature, marker) {
                         marker.on('click', function(e) {
-                            $scope.$apply('selected = ' + feature.properties.gid);
-                            $location.hash('enqueteur' + feature.properties.gid);
-                            $anchorScroll();
+                            $scope.$emit('enqueteur.selected', feature.properties.gid, false);
+                            $scope.$apply();
                         });
-                        marker.bindPopup(feature.properties.prenom);
+                        marker.bindPopup(feature.properties.prenom, {
+                            closeButton: false
+                        });
                         feature.properties.marker = marker;
                     }
                 });
@@ -51,18 +63,37 @@ angular.module('ihmApp')
                    //  },
                 // });
                 $scope.layer.addTo(map);
-                map.fitBounds($scope.layer.getBounds());
-                MapService.setOverlay('enqueteurs', $scope.layer);
+                $scope.$emit('map.data.loaded');
+                mapcontext.setOverlay('enqueteurs', $scope.layer);
             }
         });
         $scope.selectItem = function(entity) {
             // angular.element(e.target).siblings().removeClass("selected");
             // angular.element(e.target).toggleClass("selected");
-            $scope.selected = entity.properties.gid;
-            $location.hash('enqueteur' + entity.properties.gid);
-            map.panTo({ lon: entity.properties.lon, lat: entity.properties.lat });
+            $scope.$emit('enqueteur.selected', entity.properties.gid, true);
             entity.properties.marker.bounce({ duration: 1500, height: 120 });
         };
+        $scope.findEntity = function (gid) {
+            if ($scope.enqueteurs) {
+                for (var i in $scope.enqueteurs) {
+                    if ($scope.enqueteurs[i].properties.gid == gid) {
+                        return $scope.enqueteurs[i];
+                    }
+                }
+            }
+            return undefined;
+        };
+        $scope.$on('enqueteur.selected', function(event, gid, pan) {
+            var feature = $scope.findEntity(gid);
+            if (feature) {
+                $scope.selected =  gid;
+                $location.hash('enqueteur' + gid);
+                if (pan) {
+                    map.panTo({ lon: feature.properties.lon, lat: feature.properties.lat });
+                }
+                $anchorScroll();
+            }
+        });
         this.getLayer = function() {
             return $scope.layer;
         };

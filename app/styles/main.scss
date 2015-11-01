@@ -125,8 +125,19 @@ ul.list {
 }
 
 .us-marker {
-  color: darkgreen;
   font-size: 20px;
+}
+
+.us-marker-unassigned {
+  color: darkred;
+}
+
+.us-marker-assigned-other {
+  color: darkgray;
+}
+
+.us-marker-selected {
+  color: #337AB7;
 }
 
 /* Responsive: Portrait tablets and up */
