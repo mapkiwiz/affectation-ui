@@ -79,6 +79,9 @@ ul.list {
   list-style: inside none none;
   margin-top: 25px;
   margin-left: -40px;
+  max-height: 480px;
+  overflow-x: hidden;
+  overflow-y: scroll;
 
   li {
 
@@ -99,11 +102,12 @@ ul.list {
   }
 
   .selected {
-      background-color: lightgray;
+      background-color: #337AB7;
+      color: white;
   }
 
   span.action {
-    border: 1px solid gray;
+    border: 1px solid lightgray;
     border-radius: 50%;
     padding: 10px;
     display: none;
@@ -113,6 +117,16 @@ ul.list {
     display: inline-block;
   }
 
+}
+
+.enqueteurs-marker {
+  color: darkgreen;
+  font-size: 20px;
+}
+
+.us-marker {
+  color: darkgreen;
+  font-size: 20px;
 }
 
 /* Responsive: Portrait tablets and up */
