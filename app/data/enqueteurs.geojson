@@ -1,0 +1,21 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "gid": 35, "nom": "Aubrac", "prenom": "Alice", "temps_parc": 30, "lon": 6.471331, "lat": 45.710222 }, "geometry": { "type": "Point", "coordinates": [ 6.471331, 45.710222 ] } },
+{ "type": "Feature", "properties": { "gid": 14, "nom": "Brelot", "prenom": "Ben", "temps_parc": 15, "lon": 6.308819, "lat": 46.157288 }, "geometry": { "type": "Point", "coordinates": [ 6.308819, 46.157288 ] } },
+{ "type": "Feature", "properties": { "gid": 1, "nom": "Camus", "prenom": "Charles", "temps_parc": 20, "lon": 5.734983, "lat": 46.222424 }, "geometry": { "type": "Point", "coordinates": [ 5.734983, 46.222424 ] } },
+{ "type": "Feature", "properties": { "gid": 15, "nom": "Duck", "prenom": "Daisy", "temps_parc": 20, "lon": 6.413462, "lat": 46.147140 }, "geometry": { "type": "Point", "coordinates": [ 6.413462, 46.14714 ] } },
+{ "type": "Feature", "properties": { "gid": 16, "nom": "Etienne", "prenom": "Eleonore", "temps_parc": 20, "lon": 6.415357, "lat": 46.179753 }, "geometry": { "type": "Point", "coordinates": [ 6.415357, 46.179753 ] } },
+{ "type": "Feature", "properties": { "gid": 25, "nom": "Faure", "prenom": "Felix", "temps_parc": 20, "lon": 5.696263, "lat": 45.821343 }, "geometry": { "type": "Point", "coordinates": [ 5.696263, 45.821343 ] } },
+{ "type": "Feature", "properties": { "gid": 34, "nom": "Goubert", "prenom": "Georges", "temps_parc": 20, "lon": 6.340762, "lat": 46.069693 }, "geometry": { "type": "Point", "coordinates": [ 6.340762, 46.069693 ] } },
+{ "type": "Feature", "properties": { "gid": 36, "nom": "Hesse", "prenom": "Hubert", "temps_parc": 20, "lon": 5.821911, "lat": 45.688279 }, "geometry": { "type": "Point", "coordinates": [ 5.821911, 45.688279 ] } },
+{ "type": "Feature", "properties": { "gid": 40, "nom": "Imbert", "prenom": "Ilda", "temps_parc": 20, "lon": 5.926974, "lat": 45.944160 }, "geometry": { "type": "Point", "coordinates": [ 5.926974, 45.94416 ] } },
+{ "type": "Feature", "properties": { "gid": 44, "nom": "Jacopo", "prenom": "Joe", "temps_parc": 20, "lon": 6.286700, "lat": 46.044433 }, "geometry": { "type": "Point", "coordinates": [ 6.2867, 46.044433 ] } },
+{ "type": "Feature", "properties": { "gid": 46, "nom": "Kostner", "prenom": "Kevin", "temps_parc": 20, "lon": 6.274198, "lat": 46.158309 }, "geometry": { "type": "Point", "coordinates": [ 6.274198, 46.158309 ] } },
+{ "type": "Feature", "properties": { "gid": 48, "nom": "Lambert", "prenom": "Luc", "temps_parc": 20, "lon": 6.418109, "lat": 46.148770 }, "geometry": { "type": "Point", "coordinates": [ 6.418109, 46.14877 ] } },
+{ "type": "Feature", "properties": { "gid": 51, "nom": "Mauduis", "prenom": "Marco", "temps_parc": 20, "lon": 6.581790, "lat": 45.945430 }, "geometry": { "type": "Point", "coordinates": [ 6.58179, 45.94543 ] } },
+{ "type": "Feature", "properties": { "gid": 52, "nom": "Noailles", "prenom": "Noemie", "temps_parc": 20, "lon": 6.259155, "lat": 45.902687 }, "geometry": { "type": "Point", "coordinates": [ 6.259155, 45.902687 ] } }
+]
+}

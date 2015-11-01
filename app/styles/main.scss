@@ -1,0 +1,164 @@
+// bower:scss
+// endbower
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+html, body {
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 10px;
+
+  /* Make the masthead heading the same height as the navigation */
+  h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+    padding-bottom: 19px;
+  }
+}
+
+/* Custom page footer */
+.footer {
+  margin-top: 30px;
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+
+  .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+  }
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+
+  p + h4 {
+    margin-top: 28px;
+  }
+}
+
+.map-container {
+  padding: 0;
+}
+
+ul.list {
+    
+  list-style: inside none none;
+  margin-top: 25px;
+  margin-left: -40px;
+  max-height: 480px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  li {
+
+    border: 1px solid lightgray;
+    border-top: none;
+    padding: 15px;
+    margin-right: 10px
+
+  }
+
+  li:first-child {
+    border-top: 1px solid lightgray;
+    border-radius: 5px 5px 0px 0px;
+  }
+
+  li:last-child {
+    border-radius: 0px 0px 5px 5px;
+  }
+
+  .selected {
+      background-color: #337AB7;
+      color: white;
+  }
+
+  span.action {
+    border: 1px solid lightgray;
+    border-radius: 50%;
+    padding: 10px;
+    display: none;
+  }
+
+  .selected span.action {
+    display: inline-block;
+  }
+
+}
+
+.enqueteurs-marker {
+  color: darkgreen;
+  font-size: 20px;
+}
+
+.us-marker {
+  font-size: 20px;
+}
+
+.us-marker-unassigned {
+  color: darkred;
+}
+
+.us-marker-assigned-other {
+  color: darkgray;
+}
+
+.us-marker-selected {
+  color: #337AB7;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
