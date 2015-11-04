@@ -32,8 +32,8 @@ angular.module('ihmApp')
             };
         }
     ])
-  .controller('EnqueteursCtrl', ['$scope', '$window', '$location', '$anchorScroll', 'MapContext', 'EnqueteursService',
-    function($scope, $window, $location, $anchorScroll, mapcontext, service) {
+  .controller('EnqueteursCtrl', ['$scope', '$window', '$location', '$anchorScroll', 'MapContext', 'EnqueteursService', 'IsochroneService',
+    function($scope, $window, $location, $anchorScroll, mapcontext, service, isochrone) {
         var map = mapcontext.getMap();
         $scope.selected = undefined;
         $scope.$watch(service.entities, function(newValue, oldValue) {
@@ -91,6 +91,14 @@ angular.module('ihmApp')
                 if (pan) {
                     map.panTo({ lon: feature.properties.lon, lat: feature.properties.lat });
                 }
+                // isochrone(feature.properties.lon, feature.properties.lat, 20, function(data) {
+                isochrone(feature.properties.gid, function(data) {
+                    if ($scope.isochrone) {
+                        map.removeLayer($scope.isochrone);
+                    }
+                    $scope.isochrone = $window.L.geoJson(data);
+                    $scope.isochrone.addTo(map);
+                });
                 $anchorScroll();
             }
         });
