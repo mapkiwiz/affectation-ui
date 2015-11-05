@@ -8,7 +8,14 @@ the purpose of this app is to graphically assign tasks to workers.</p>
 
 See it in action : [Demo](//mapkiwiz.github.io/affectation-ui/demo/)
 
-## Run the application
+## Install dependencies
+
+```
+npm install
+./node_modules/bower/bin/bower.js install
+```
+
+## Run the application on a local server
 
 ```
 npm run server
