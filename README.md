@@ -1,12 +1,21 @@
-# ihm
+## Assign tasks to workers 
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.14.0.
+This example app demonstrates Leaflet integration in an Angular application
+and bidirectional cooperation between a list and a map.</p>
 
-## Build & development
+Given a list of workers and of tasks, and the map coordinates of each item,
+the purpose of this app is to graphically assign tasks to workers.</p>
 
-Run `grunt` for building and `grunt serve` for preview.
+See it in action : [Demo](http://github.io/mapkiwiz/affectation-ui/demo/)
 
-## Testing
+## Run the application
 
-Running `grunt test` will run the unit tests with karma.
+```
+npm run server
+```
+
+## Build
+
+```
+npm run build
+```
