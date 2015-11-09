@@ -91,8 +91,8 @@ angular.module('ihmApp')
                 if (pan) {
                     map.panTo({ lon: feature.properties.lon, lat: feature.properties.lat });
                 }
-                // isochrone(feature.properties.lon, feature.properties.lat, 20, function(data) {
-                isochrone(feature.properties.gid, function(data) {
+                isochrone(feature.properties.lon, feature.properties.lat, 20000, function(data) {
+                // isochrone(feature.properties.gid, function(data) {
                     if ($scope.isochrone) {
                         map.removeLayer($scope.isochrone);
                     }
