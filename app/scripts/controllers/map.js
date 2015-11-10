@@ -29,6 +29,7 @@ angular.module('ihmApp')
 	                label: "Open Street Map" }
 	        };
   		return {
+  			basemap: basemaps.lite,
   			getMap: function() {
 		        	return map;
 		        },
@@ -55,7 +56,12 @@ angular.module('ihmApp')
 		    getBaseMaps: function() {
 			    	return basemaps;
 			    },
-			 fitAll: function() {
+			setBaseMap: function(basemap) {
+		            map.removeLayer(this.basemap.layer);
+		            basemap.layer.addTo(map);
+		            this.basemap = basemap;
+		        },
+			fitAll: function() {
 			 	var bounds = this.getBounds();
 			 	if (bounds) {
 			 		map.fitBounds(bounds);
@@ -69,11 +75,6 @@ angular.module('ihmApp')
       	var map = mapcontext.getMap();
       	$rootScope.mapcontext = mapcontext;
         $scope.title = "TestTitle";
-        $scope.setBaseMap = function(basemap) {
-            map.removeLayer($scope.basemap.layer);
-            basemap.layer.addTo(map);
-            $scope.basemap = basemap;
-        };
         $scope.fitAll = function() {
         	mapcontext.fitAll();
         };

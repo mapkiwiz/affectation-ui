@@ -56,8 +56,8 @@
                   Couches <span class="caret"></span>
                 </a>
                 <ul class="uib-dropdown-menu" role="menu" aria-labelledby="layer-control">
-                  <li role="menuitem" ng-repeat="basemap in basemaps" >
-                    <a ng-click="setBaseMap(basemap)">{{ basemap.label }}</a>
+                  <li role="menuitem" ng-repeat="basemap in mapcontext.getBaseMaps()" >
+                    <a ng-click="mapcontext.setBaseMap(basemap)">{{ basemap.label }}</a>
                   </li>
                 </ul>
             </li>
