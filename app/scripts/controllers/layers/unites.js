@@ -21,8 +21,8 @@ angular.module('ihmApp')
             };
         }
     ])
-    .controller('UnitesCtrl', ['$scope', '$window', 'MapContext', 'UnitesService',
-    	function($scope, $window, mapcontext, service) {
+    .controller('UnitesLayerCtrl', ['$rootScope', '$scope', '$window', 'MapContext', 'UnitesService',
+    	function($rootScope, $scope, $window, mapcontext, service) {
 
     		var map = mapcontext.getMap();
 
@@ -73,8 +73,10 @@ angular.module('ihmApp')
 			            		$scope.layer.removeLayer(this);
 			            		if (feature.properties.enqueteur == enqueteur_id) {
 			            			feature.properties.enqueteur = undefined;
+                                    $rootScope.$broadcast('us.unassigned', feature);
 			            		} else {
 			            			feature.properties.enqueteur = enqueteur_id;
+                                    $rootScope.$broadcast('us.assigned', feature);
 			            		}
 			            		var newmarker = $scope.featureToMarker(feature, this.getLatLng(), enqueteur_id);
 			            		newmarker.addTo($scope.layer);
@@ -99,7 +101,7 @@ angular.module('ihmApp')
 		        }
 		    );
 		    
-		    $scope.$on('enqueteur.selected.bc', function(event, gid) {
+		    $scope.$on('enqueteur.selected', function(event, gid) {
 	    		$scope.drawLayer(gid);
 		    });
 		    

@@ -22,23 +22,21 @@ angular
   ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
-      .when('/map', {
-        templateUrl: 'map/views/main.html',
-        controller: 'MainCtrl',
+      .when('/', {
+        templateUrl: 'views/main.html',
+        controller: 'EnqueteurPanelCtrl',
         controllerAs: 'main'
       })
-      .when('/map/about', {
-        templateUrl: 'map/views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+      .when('/list', {
+        templateUrl: 'views/lists.html',
+        controller: 'ListCtrl',
+        controllerAs: 'list'
       })
-      .when('/map/test', {
-        templateUrl: 'map/views/test.html',
-        controller: 'MapCtrl',
-        controllerAs: 'test'
+      .when('/help', {
+        templateUrl: 'views/help.html',
       })
       .otherwise({
-        redirectTo: '/map'
+        redirectTo: '/'
       });
     // configure html5 to get links working on jsfiddle
     $locationProvider.html5Mode(true);

@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="ihmApp" ng-controller="MapCtrl">
+  <body ng-app="ihmApp" ng-controller="MainCtrl">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -41,10 +41,11 @@
         <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Main</a></li>
-            <li><a ng-href="/about">Exporter</a></li>
-            <li><a ng-href="/test">Enquêtes</a></li>
-            <li><a ng-href="/">Aide</a></li>
+            <li><a ng-href="/list">Liste</a></li>
+            <li class="active"><a href="/">Sélection</a></li>
+            <li><a ng-click="exportCSV()">Exporter</a></li>
+           <!--  <li><a ng-href="/enquetes">Enquêtes</a></li> -->
+            <li><a ng-href="/help">Aide</a></li>
           </ul>
           <ul  class="nav navbar-nav navbar-right">
             <li><a ng-click="mapcontext.getMap().zoomIn()">Zoom In</a></li>
@@ -65,48 +66,13 @@
       </div>
     </div>
   
-    <div class="container-fluid map-container" style="height: 100%">
+    <div class="container-fluid map-container" style="height: 100%" ng-controller="MapCtrl">
       <div id="map" style="width: 100%; height: 100%"></div>
+      <div ng-controller="EnqueteursLayerCtrl" style="display: none"></div>
+      <div ng-controller="UnitesLayerCtrl" style="display: none"></div>
     </div>
 
-    <div class="container-fluid" style="position: absolute; z-index: 900; top: 70px; left: 0; pointer-events: none; width: 98%; margin-left: 1%">
-      <div class="row" style="width: 100%">
-          <div class="col-md-4" style="background-color: white; border: 1px solid lightgray; padding: 15px; pointer-events: all; box-shadow: 4px 4px 5px #aaa;">
-            <uib-tabset justified="true">
-              <uib-tab heading="Enquêteurs">
-                <ul ng-controller="EnqueteursCtrl" class="list">
-                  <li id="enqueteur{{ enq.properties.gid }}"
-                      ng-repeat="enq in enqueteurs"
-                      ng-click="selectItem(enq)"
-                      ng-class="{ 'selected': (selected == enq.properties.gid) }">
-                    <span class="glyphicon glyphicon-map-marker"></span>
-                    {{ enq.properties.prenom }} {{ enq.properties.nom }}
-                    <div class="pull-right" style="margin-top: -8px">
-                      <span class="action glyphicon glyphicon-remove"></span>
-                      <span class="action glyphicon glyphicon-menu-hamburger"></span>
-                    </div>
-                  </li>
-                </ul>
-              </uib-tab>
-              <uib-tab heading="Unités statistiques">
-                <ul ng-controller="UnitesCtrl" class="list">
-                  <li ng-repeat="unite in unites.features">
-                    <span class="glyphicon glyphicon-record"></span>
-                    {{ unite.properties.gid }}
-                  </li>
-                </ul>
-            </uib-tab>
-          </uib-tabset>
-        </div>
-         <!--  <div class="col-md-7 col-md-offset-1" style="background-color: white; border: 1px solid lightgray; padding: 15px; pointer-events: all; box-shadow: 4px 4px 5px #aaa;">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </div> -->
-      </div>
+    <div ng-view="" class="container-fluid" style="position: absolute; z-index: 900; top: 70px; left: 0; pointer-events: none; width: 98%; margin-left: 1%">
     </div>
 
     <!-- build:js(.) scripts/vendor.js -->
@@ -131,11 +97,12 @@
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/controllers/enqueteur.js"></script>
+    <script src="scripts/controllers/list.js"></script>
     <script src="scripts/controllers/map.js"></script>
-    <script src="scripts/controllers/enqueteurs.js"></script>
-    <script src="scripts/controllers/unites.js"></script>
-    <script src="scripts/services/gpp/routing_services.js"></script>
+    <script src="scripts/controllers/layers/enqueteurs.js"></script>
+    <script src="scripts/controllers/layers/unites.js"></script>
+    <script src="scripts/services/local/routing_services.js"></script>
     <!-- endbuild -->
 
 </body>

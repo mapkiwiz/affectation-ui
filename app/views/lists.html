@@ -1,0 +1,31 @@
+<div class="row" style="width: 100%">
+    <div class="col-md-4" style="background-color: white; border: 1px solid lightgray; padding: 15px; pointer-events: all; box-shadow: 4px 4px 5px #aaa;">
+      <form class="form-inline">
+        <div class="input-group">
+          <input class="form-control" ng-model="query" type="text" placeholder="Filtrer" autofocus />
+          <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+        </div>
+      </form>
+      <ul class="list">
+        <li id="enqueteur{{ enq.properties.gid }}"
+            ng-repeat="enq in enqueteurs | filter:{ properties: { nom: query }} | orderBy:'properties.nom'"
+            ng-click="selectItem(enq)"
+            ng-class="{ 'selected': (selected == enq.properties.gid) }">
+          <span class="glyphicon glyphicon-map-marker"></span>
+          {{ enq.properties.prenom }} {{ enq.properties.nom }}
+          <div ng-if="selected" class="pull-right" style="margin-top: -8px">
+            <span class="action glyphicon glyphicon-remove"></span>
+            <span class="action glyphicon glyphicon-menu-hamburger"></span>
+          </div>
+        </li>
+      </ul>
+  </div>
+   <!--  <div class="col-md-7 col-md-offset-1" style="background-color: white; border: 1px solid lightgray; padding: 15px; pointer-events: all; box-shadow: 4px 4px 5px #aaa;">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div> -->
+</div>

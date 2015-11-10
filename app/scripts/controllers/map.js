@@ -64,9 +64,10 @@ angular.module('ihmApp')
   		};
   	}
   ])
-  .controller('MapCtrl', ['$scope', '$window', 'MapContext',
-      function ($scope, $window, mapcontext) {
+  .controller('MapCtrl', ['$rootScope', '$scope', '$window', 'MapContext',
+      function ($rootScope, $scope, $window, mapcontext) {
       	var map = mapcontext.getMap();
+      	$rootScope.mapcontext = mapcontext;
         $scope.title = "TestTitle";
         $scope.setBaseMap = function(basemap) {
             map.removeLayer($scope.basemap.layer);
@@ -84,9 +85,6 @@ angular.module('ihmApp')
             var mapView = mapcontext.getView();
             map.setView($window.L.latLng(mapView.lat, mapView.lng), mapView.zoom, true);
         };
-        $scope.$on('enqueteur.selected', function(event, gid, pan) {
-        	$scope.$broadcast('enqueteur.selected.bc', gid, pan);
-        });
         $scope.$on('map.data.loaded', function() {
         	mapcontext.fitAll();
         });
