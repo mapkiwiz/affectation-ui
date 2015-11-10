@@ -41,9 +41,10 @@
         <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
           <ul class="nav navbar-nav">
-            <li><a ng-href="/list">Liste</a></li>
+            <li><a ng-href="/import">Données</a></li>
+            <li><a ng-href="/list">Enquêteurs</a></li>
             <li class="active"><a href="/">Sélection</a></li>
-            <li><a ng-click="exportCSV()">Exporter</a></li>
+            <li><a ng-click="exportCSV()">Enregistrer</a></li>
            <!--  <li><a ng-href="/enquetes">Enquêtes</a></li> -->
             <li><a ng-href="/help">Aide</a></li>
           </ul>
@@ -100,6 +101,7 @@
     <script src="scripts/controllers/enqueteur.js"></script>
     <script src="scripts/controllers/list.js"></script>
     <script src="scripts/controllers/map.js"></script>
+    <script src="scripts/controllers/import.js"></script>
     <script src="scripts/controllers/layers/enqueteurs.js"></script>
     <script src="scripts/controllers/layers/unites.js"></script>
     <script src="scripts/services/local/routing_services.js"></script>

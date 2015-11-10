@@ -1,0 +1,23 @@
+<div class="row" style="width: 100%">
+    <div class="col-md-4" style="background-color: white; border: 1px solid lightgray; padding: 15px; pointer-events: all; box-shadow: 4px 4px 5px #aaa;">
+
+    	<h3>Importer des données</h3>
+    	<hr/>
+
+    	<div class="form-group">
+	    	<label for="taskFiles">Importer un fichier d'unités statistiques</label>
+	    	<input id="taskFiles" type="file" ng-model="taskFiles" file-change="handler($event, files)" />
+	    	<p class="help-block">
+	    		<dl>
+	    			<dt>Format</dt>
+	    			<dd>CSV (séparateur virgule)</dd>
+	    			<dt>Champs</dt>
+	    			<dd>id*, lon*, lat*, group, worker</dd>
+	    			<dt>Coordonnées</dt>
+	    			<dd>WGS84 (EPSG:4326)</dd>
+	    		</dl>
+	    	</p>
+	    </div>
+
+    </div>
+</div>

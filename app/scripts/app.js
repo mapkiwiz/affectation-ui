@@ -32,6 +32,11 @@ angular
         controller: 'ListCtrl',
         controllerAs: 'list'
       })
+      .when('/import', {
+        templateUrl: 'views/import.html',
+        controller: 'ImportCtrl',
+        controllerAs: 'import'
+      })
       .when('/help', {
         templateUrl: 'views/help.html',
       })

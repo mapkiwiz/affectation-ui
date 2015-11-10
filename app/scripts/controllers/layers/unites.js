@@ -15,6 +15,9 @@ angular.module('ihmApp')
             };
             return {
                 getEntities: getEntities,
+                setEntities: function(collection) {
+                    partials = collection;
+                },
                 entities: function () {
                     return partials;
                 }

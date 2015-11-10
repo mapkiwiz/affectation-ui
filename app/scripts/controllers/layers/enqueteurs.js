@@ -34,6 +34,9 @@ angular.module('ihmApp')
                 entities: function () {
                     return partials;
                 },
+                setEntities: function(collection) {
+                    partials = collection;
+                },
                 findEntity: findEntity,
                 selected: function() {
                     if (this.selectionId) {
