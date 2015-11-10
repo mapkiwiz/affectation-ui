@@ -6,6 +6,9 @@
  * @description
  * # ImportCtrl
  * Controller of the ihmApp
+ * 
+ * @see
+ * http://stackoverflow.com/questions/28070374/parsing-a-csv-file-provided-by-an-input-in-angular
  */
 angular.module('ihmApp')
 
@@ -25,7 +28,7 @@ angular.module('ihmApp')
 	  }
 	}])
 
-    .filter('csvToGeojson', function(){
+    .filter('csvToGeojson', function() {
 
       var valToObj = function(values, header) {
 
@@ -41,7 +44,7 @@ angular.module('ihmApp')
 
       };
 
-      return function(input){
+      return function(input) {
 
         var separator = ",";
         var rows = input.split('\n');
@@ -86,6 +89,7 @@ angular.module('ihmApp')
                     service.setEntities(obj);
                     $scope.$apply();
                 }
+                console.log(files[0]);
                 reader.readAsText(files[0]);
 			};
 
