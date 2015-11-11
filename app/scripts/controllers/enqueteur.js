@@ -12,15 +12,15 @@ angular.module('ihmApp')
       
   		$scope.update = function() {
   			$scope.unites = [];
-			var entities = unites.entities();
-			if ($scope.selected && entities) {
-				for (var i in entities.features) {
-					var u = entities.features[i];
-					if (u.properties.enqueteur === $scope.selected.properties.gid) {
-						$scope.unites.push(u);
-					}
-				}
-			}
+  			var entities = unites.entities();
+  			if ($scope.selected && entities) {
+  				for (var i in entities.features) {
+  					var u = entities.features[i];
+  					if (u.properties.enqueteur === $scope.selected.properties.gid) {
+  						$scope.unites.push(u);
+  					}
+  				}
+  			}
   		};
 
   		$scope.$watch(
@@ -35,15 +35,9 @@ angular.module('ihmApp')
   			}
   		);
 
-  		$scope.$on('us.assigned', function(event, us) {
-  			if ($scope.selected && us.properties.enqueteur === $scope.selected.properties.gid) {
-  				$scope.unites.push(us);
-  			}
-  		});
-
-  		$scope.$on('us.unassigned', function() {
-  			$scope.update();
-  		})
+  		// $scope.$on('task.reassigned', function() {
+  		// 	$scope.update();
+  		// })
 
     }
   ]);

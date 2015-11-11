@@ -13,10 +13,13 @@
             ng-class="{ 'selected': (selected == enq.properties.gid) }">
           <span class="glyphicon glyphicon-map-marker"></span>
           {{ enq.properties.prenom }} {{ enq.properties.nom }}
-          <div ng-if="selected" class="pull-right" style="margin-top: -8px">
+          <span class="badge badge-primary pull-right">
+            {{ enq.properties.load || 0 }}
+          </span>
+          <!-- <div ng-if="(selected == enq.properties.gid)" class="pull-right" style="margin-top: -8px">
             <span class="action glyphicon glyphicon-remove"></span>
             <span class="action glyphicon glyphicon-menu-hamburger"></span>
-          </div>
+          </div> -->
         </li>
       </ul>
   </div>

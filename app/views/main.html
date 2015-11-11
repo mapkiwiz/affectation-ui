@@ -7,9 +7,12 @@
       <div ng-if="selected">
         <h3>Enquêteur sélectionné</h3>
         <hr/>
-        <b>{{ selected.properties.prenom }} {{ selected.properties.nom }}</b>
-        <br/>
-        <span class="badge">{{ unites.length }}</span> unités affectées
+        <p><b>{{ selected.properties.prenom }} {{ selected.properties.nom }}</b>
+          <span class="pull-right">
+            <span class="badge">{{ selected.properties.load || 0 }}</span> 
+            / {{ selected.properties.capacity || 10 }}
+          </span>
+        </p>
       </div>
     </div>
 </div>

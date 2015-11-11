@@ -76,10 +76,17 @@ angular.module('ihmApp')
 			            		$scope.layer.removeLayer(this);
 			            		if (feature.properties.enqueteur == enqueteur_id) {
 			            			feature.properties.enqueteur = undefined;
-                                    $rootScope.$broadcast('us.unassigned', feature);
+                                    $rootScope.$broadcast('task.reassigned', {
+                                        entity: feature,
+                                        wasAssignedTo: enqueteur_id,
+                                        assignedTo: undefined });
 			            		} else {
+                                    var previous_enqueteur = feature.properties.enqueteur;
 			            			feature.properties.enqueteur = enqueteur_id;
-                                    $rootScope.$broadcast('us.assigned', feature);
+                                    $rootScope.$broadcast('task.reassigned', {
+                                        entity: feature,
+                                        wasAssignedTo: previous_enqueteur,
+                                        assignedTo: enqueteur_id });
 			            		}
 			            		var newmarker = $scope.featureToMarker(feature, this.getLatLng(), enqueteur_id);
 			            		newmarker.addTo($scope.layer);
@@ -107,6 +114,10 @@ angular.module('ihmApp')
 		    $scope.$on('enqueteur.selected', function(event, gid) {
 	    		$scope.drawLayer(gid);
 		    });
+
+            $scope.$on('assignment.changed', function() {
+                $scope.drawLayer();
+            })
 		    
 		    service.getEntities();
     	

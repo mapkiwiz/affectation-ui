@@ -62,19 +62,27 @@ angular.module('ihmApp')
     function($rootScope, $scope, $window, $location, $anchorScroll, mapcontext, service, isochrone) {
         
         var map = mapcontext.getMap();
+
+        var updateWorkerIndex = function(features) {
+            $scope.workerIndex = {};
+            angular.forEach(features, function(feature) {
+                $scope.workerIndex[feature.properties.gid] = feature; 
+            });
+        };
         
         $scope.$watch(service.entities, function(newValue, oldValue) {
             if (newValue) {
                 $scope.enqueteurs = newValue.features;
+                updateWorkerIndex(newValue.features);
                 $scope.layer = $window.L.geoJson(newValue, {
                     onEachFeature: function(feature, marker) {
                         marker.on('click', function(e) {
-                            $rootScope.$broadcast('enqueteur.selected', feature.properties.gid, false);
+                            $rootScope.$broadcast('enqueteur.selected', feature.properties.gid, false, true);
                             $scope.$apply();
                         });
-                        marker.bindPopup(feature.properties.prenom, {
-                            closeButton: false
-                        });
+                        // marker.bindPopup(feature.properties.prenom, {
+                        //     closeButton: false
+                        // });
                         feature.properties.marker = marker;
                     }
                 });
@@ -95,11 +103,10 @@ angular.module('ihmApp')
             }
         });
 
-        $scope.$on('enqueteur.selected', function(event, gid, pan) {
+        $scope.$on('enqueteur.selected', function(event, gid, pan, scroll) {
             var feature = service.findEntity(gid);
             if (feature) {
                 service.selectionId =  gid;
-                $location.hash('enqueteur' + gid);
                 if (pan) {
                     map.panTo({ lon: feature.properties.lon, lat: feature.properties.lat });
                 }
@@ -111,7 +118,20 @@ angular.module('ihmApp')
                     $scope.isochrone = $window.L.geoJson(data);
                     $scope.isochrone.addTo(map);
                 });
-                $anchorScroll();
+                if (scroll) {
+                    $anchorScroll('enqueteur' + gid);
+                }
+            }
+        });
+
+        $scope.$on('task.reassigned', function(event, params) {
+            if (params.wasAssignedTo) {
+                var worker = $scope.workerIndex[params.wasAssignedTo];
+                worker.properties.load = worker.properties.load - 1;
+            }
+            if (params.assignedTo) {
+                var worker = $scope.workerIndex[params.assignedTo];
+                worker.properties.load = worker.properties.load + 1;
             }
         });
 

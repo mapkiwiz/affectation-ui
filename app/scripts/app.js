@@ -40,6 +40,11 @@ angular
       .when('/help', {
         templateUrl: 'views/help.html',
       })
+      .when('/assign', {
+        templateUrl: 'views/assign.html',
+        controller: 'AssignCtrl',
+        controllerAs: 'assign'
+      })
       .otherwise({
         redirectTo: '/'
       });

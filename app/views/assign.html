@@ -1,0 +1,46 @@
+<div class="row" style="width: 100%">
+    <div class="col-md-4" style="background-color: white; border: 1px solid lightgray; padding: 15px; pointer-events: all; box-shadow: 4px 4px 5px #aaa;">
+
+    	<h3>Préaffecter les unités statistiques</h3>
+
+    	<hr/>
+
+    	<ul>
+    		<li>Unités affectées : <span>{{ assignedTasks || 0 }}</span></li>
+    		<li>Unités non affectées : <span>{{ unassignedTasks || 0 }}</span></li>
+    		<li>Enquêteurs mobilisés : <span>{{ hiredWorkers || 0 }}</span></li>
+    		<li>Enquêteurs non mobilisés : <span>{{ unusedWorkers || 0 }}</span></li>
+    	</ul>
+
+    	<hr/>
+
+    	<p>
+	    	<a ng-if="mustConfirmBeforeProcess"
+	    	   class="btn btn-primary" ng-click="confirmBeforeProcess()">
+	    	   Calculer
+	    	</a>
+    	</p>
+
+    	<div ng-if="!mustConfirmBeforeProcess">
+
+    		<p>
+    			<b>Attention !</b>
+    		</p>
+    		
+    		<p>
+    			Cette opération va effacer les affectations précédemment enregistrées.
+    		</p>
+
+    		<p>
+		    	<a class="btn btn-danger" ng-click="computeAssignment()">
+		    	   Calculer
+		    	</a>
+
+		    	<a class="btn btn-default" ng-click="cancel()">
+		    	   Annuler
+		    	</a>
+	    	</p>
+	    </div>
+
+    </div>
+</div>
